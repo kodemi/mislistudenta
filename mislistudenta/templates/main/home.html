@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+{% load bootstrap %}
+{% block javascript %}
+    <script src="static/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="static/script.js"></script>
+{% endblock %}
+{% block content %}
+    <div id="main" class="row">
+        <div class="span-one-third">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta eleifend accumsan. Maecenas faucibus convallis elit, at laoreet turpis tincidunt in. Suspendisse mauris augue, tincidunt quis blandit a, dictum vel tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut tellus nulla, iaculis sed euismod quis, gravida et ante. Praesent tristique mattis sapien quis laoreet. Curabitur eget ligula diam, eu semper dolor. Duis in porttitor tortor. Donec semper, risus a tincidunt facilisis, quam arcu pellentesque arcu, sed dignissim nulla felis nec purus. Donec tincidunt dictum arcu sit amet luctus. Maecenas nibh lacus, molestie sed pellentesque et, pellentesque nec felis. Suspendisse tortor felis, scelerisque vitae tincidunt non, bibendum vitae mauris.</p>
+        </div>
+        <div class="span-one-third">
+            <img src="http://placehold.it/300x300">
+        </div>
+        <div class="span-one-third">
+            <form class="form-stacked">
+            {{ form|bootstrap }}
+            <button data-control-modals="order_check" class="btn primary">ЗАКАЗАТЬ</button>
+            </form>
+        </div>
+    </div>
+    <div id="order_check" class="modal hide">
+        dfdfdfd
+    </div>
+{% endblock %}

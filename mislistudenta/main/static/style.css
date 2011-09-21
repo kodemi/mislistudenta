@@ -1,0 +1,14 @@
+@font-face {
+  font-family: "Calibri";
+  /*src: url( /location/of/font/FontFileName.eot ); *//* IE */
+  src: local("Calibri"), url( static/CALIBRI.ttf ) format("truetype"); /* non-IE */
+}
+
+p {
+    font-family: Calibri;
+    font-size: 11pt;
+}
+
+#main {
+    margin-top: 100px;
+}

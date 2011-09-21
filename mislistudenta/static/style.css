@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Calibri";
+  /*src: url( /location/of/font/FontFileName.eot ); *//* IE */
+  src: local("Calibri"), url( {{STATIC_URL}}/CALIBRI.ttf ) format("truetype"); /* non-IE */
+}
+
+/* THEN use like you would any other font */
+.Calibri { font-family:"Calibri", verdana, helvetica, sans-serif;
+}
