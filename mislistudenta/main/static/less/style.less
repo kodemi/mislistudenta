@@ -1,0 +1,75 @@
+@font-face {
+  font-family: "Calibri";
+  /*src: url( /location/of/font/FontFileName.eot ); *//* IE */
+  src: local("Calibri"), url( static/CALIBRI.ttf ) format("truetype"); /* non-IE */
+}
+
+@basefont: 11pt;
+//@baseline: 16pt;
+//@back_color: #442d25;
+@footer_color: #261805;
+@back_color: #FFD48E;
+@back_color2: darken(@back_color, 20%);
+p, label {
+    font-family: Calibri;
+    color: @black;
+}
+
+
+#main {
+    margin-top: 100px;
+    p {
+        text-align: justify;
+    }
+}
+
+body {
+//    background-color: @back_color;
+    #gradient > .vertical(@back_color, @back_color2);
+    /*position: relative;*/
+    overflow: auto;
+    padding-top: 40px;
+}
+
+/*html, body {*/
+    /*height: 100%;*/
+/*}*/
+
+//#content {
+//	min-height: 100%;
+//	height: auto !important;
+//	height: 100%;
+//	margin: 0 auto -98px; /* the bottom margin is the negative value of the footer's height */
+//}
+
+/*.footer {*/
+	/*height: 80px; *//* .push must be the same height as .footer */
+/*}*/
+
+.push {
+    height: 98px;
+}
+
+//.footer {
+//    background-color: @footer_color;
+//}
+
+footer {
+    /*margin: 0;*/
+    border-top: none;
+    padding-top: 40px;
+    p {
+        border-top: 1px solid darken(@back_color, 40%);
+        padding-top: 17px;
+        color: @grayDark;
+        text-align: center;
+    }
+}
+
+.form-stacked {
+    padding-left: 0;
+}
+
+header {
+    background-color: @footer_color;
+}

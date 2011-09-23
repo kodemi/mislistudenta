@@ -2,24 +2,44 @@
 {% load bootstrap %}
 {% block javascript %}
     <script src="static/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="static/bootstrap/js/bootstrap-alerts.js"></script>
+    <script src="static/jquery.validationEngine-ru.js"</script>
+    <script src="static/jquery.validationEngine.js"</script>
     <script src="static/script.js"></script>
+    <link rel="stylesheet" href="static/validationEngine.jquery.css" type="text/css"/>
 {% endblock %}
 {% block content %}
     <div id="main" class="row">
-        <div class="span-one-third">
+        <div class="span4">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta eleifend accumsan. Maecenas faucibus convallis elit, at laoreet turpis tincidunt in. Suspendisse mauris augue, tincidunt quis blandit a, dictum vel tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut tellus nulla, iaculis sed euismod quis, gravida et ante. Praesent tristique mattis sapien quis laoreet. Curabitur eget ligula diam, eu semper dolor. Duis in porttitor tortor. Donec semper, risus a tincidunt facilisis, quam arcu pellentesque arcu, sed dignissim nulla felis nec purus. Donec tincidunt dictum arcu sit amet luctus. Maecenas nibh lacus, molestie sed pellentesque et, pellentesque nec felis. Suspendisse tortor felis, scelerisque vitae tincidunt non, bibendum vitae mauris.</p>
         </div>
-        <div class="span-one-third">
-            <img src="http://placehold.it/300x300">
+        <div class="span9">
+            <img src="http://placehold.it/520x460">
         </div>
-        <div class="span-one-third">
-            <form class="form-stacked">
-            {{ form|bootstrap }}
-            <button data-control-modals="order_check" class="btn primary">ЗАКАЗАТЬ</button>
-            </form>
+        <div class="span3">
+            {% include "main/order_form.html" %}
         </div>
     </div>
-    <div id="order_check" class="modal hide">
-        dfdfdfd
+
+    <div id="order_check" class="modal hide fade">
+        <div class="modal-header">
+            <a href="#" class="close">&times;</a>
+            <h3>Подтвердите данные</h3>
+        </div>
+        <form>
+        <div class="modal-body">
+
+            {{ check_order_form|bootstrap }}
+{#            </form>#}
+        </div>
+        <div class="modal-footer">
+            <button class="btn success">ЗАКАЗАТЬ</button>
+        </div>
+        </form>
     </div>
+    <div class="empty_field_alert alert-message error fade in">
+        <a class="close" href="#">&times;</a>
+        <p>11111</p>
+    </div>
+
 {% endblock %}

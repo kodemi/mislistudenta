@@ -1,0 +1,7 @@
+{% load bootstrap %}
+<form id="order_form" action="" method="post" class="form-stacked">
+    {% csrf_token %} 
+    {{ order_form|bootstrap }}
+    <button class="btn primary">ЗАКАЗАТЬ</button>
+    <input class="submit" type="submit" value="111">
+</form>
