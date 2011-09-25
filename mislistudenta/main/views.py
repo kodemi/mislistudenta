@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.core.context_processors import csrf
 from main.forms import OrderForm, CheckOrderForm
+from main.models import Customer
 from django.utils import simplejson
 
 def home(request):
@@ -20,10 +21,12 @@ def order(request):
         if form.is_valid():
             print "ololo"
             #Do Something, e.g. save, send an email
+            form.save()
             template = "main/success.html"
             success = True
         else:
             template = "main/order_form.html"
+            form._errors = {}
             context["order_form"] = form
             success = False
     else:
