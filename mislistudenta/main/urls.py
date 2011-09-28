@@ -4,6 +4,5 @@ from main.views import *
 urlpatterns = patterns('',
     url(r'^$', home),
     url(r'^order', order),
-
 )
   

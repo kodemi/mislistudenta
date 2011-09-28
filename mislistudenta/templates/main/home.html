@@ -10,33 +10,19 @@
 {% endblock %}
 {% block content %}
     <div id="main" class="row">
-        <div class="span4">
+        <div class="span5">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta eleifend accumsan. Maecenas faucibus convallis elit, at laoreet turpis tincidunt in. Suspendisse mauris augue, tincidunt quis blandit a, dictum vel tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut tellus nulla, iaculis sed euismod quis, gravida et ante. Praesent tristique mattis sapien quis laoreet. Curabitur eget ligula diam, eu semper dolor. Duis in porttitor tortor. Donec semper, risus a tincidunt facilisis, quam arcu pellentesque arcu, sed dignissim nulla felis nec purus. Donec tincidunt dictum arcu sit amet luctus. Maecenas nibh lacus, molestie sed pellentesque et, pellentesque nec felis. Suspendisse tortor felis, scelerisque vitae tincidunt non, bibendum vitae mauris.</p>
+            <a href="#" id="buy" class="btn primary">Buy</a>
         </div>
-        <div class="span8">
-            <img src="http://placehold.it/460x460">
-        </div>
-        <div class="span4">
-            {% include "main/order_form.html" %}
+        <div class="span11">
+            <img src="http://placehold.it/640x460">
         </div>
     </div>
 
-    <div id="order_check" class="modal hide fade">
-        <div class="modal-header">
-            <a href="#" class="close">&times;</a>
-            <h3>Подтвердите данные</h3>
+    <div id="order_dialog" class="modal hide fade">
+        <div class="content">
+        <!--{% include "main/order_dialog_step1.html" %}-->
         </div>
-        <form>
-        <div class="modal-body">
-
-{#            {{ check_order_form|bootstrap }}#}
-            {% include "main/order_check.html" %}
-{#            </form>#}
-        </div>
-        <div class="modal-footer">
-            <button class="btn success">ЗАКАЗАТЬ</button>
-        </div>
-        </form>
     </div>
     
 {% endblock %}

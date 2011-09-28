@@ -10,8 +10,9 @@
 @footer_color: #261805;
 @back_color: #FFD48E;
 @back_color2: darken(@back_color, 20%);
+
 p, label {
-    font-family: Calibri;
+    /*font-family: Calibri;*/
     color: @black;
 }
 
@@ -25,12 +26,23 @@ p, label {
 
 body {
 //    background-color: @back_color;
-    #gradient > .vertical(@back_color, @back_color2);
     /*position: relative;*/
     overflow: auto;
-    padding-top: 40px;
+    /*padding-top: 40px;*/
+    #gradient > .vertical(@back_color, @back_color2);
 }
 
+html {
+    #gradient > .vertical(@back_color, @back_color2);
+}
+
+#order_dialog {
+    z-index: 2000;
+}
+
+.modal-backdrop {
+    z-index: 1000;
+}
 /*html, body {*/
     /*height: 100%;*/
 /*}*/
@@ -66,10 +78,11 @@ footer {
     }
 }
 
-.form-stacked {
-    padding-left: 0;
-}
-
 header {
     background-color: @footer_color;
+}
+
+.loader {
+    position: relative;
+    top: @baseline/2;
 }

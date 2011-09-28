@@ -1,0 +1,25 @@
+{% load main_extras %}
+<div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h3>Проверьте, все ли верно</h3>
+</div>
+<div class="modal-body">
+    <table>
+        {% for field in check_form %}
+        <tr>
+            <th>{{ field.label }}:</th>
+            <td>{{ field|display_value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form id="order_form" action="" method="post">{% csrf_token %}
+        {% for field in check_form %}{{ field.as_hidden }}
+        {% endfor %}
+        <input type="hidden" name="step" value="2" />
+    </form>
+</div>
+<div class="modal-footer">
+    <button id="order_dialog_btn_step2" class="btn success">Заказать</button>
+    <button id="order_dialog_btn_back_step2" class="btn primary">Назад</button>
+    <img src="static/ajax-loader.gif" alt="Идет обработка..." class="loader hide">
+</div>

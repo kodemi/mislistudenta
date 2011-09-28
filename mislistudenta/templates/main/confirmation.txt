@@ -1,0 +1,9 @@
+Уважаемый {{ order.customer }}.
+
+Вы заказали "{{ order.book }}" в количестве {{ order.quantity }} шт. на сайте http://mislistudenta.ru.
+Номер вашего заказа {{ order.order_number }}.
+Стоимость: {{ order.amount }} руб.
+Форма оплаты: {{ order.get_payment_method_display }}.
+Вид доставки: {{ order.get_delivery_method_display }}.
+
+Благодарим вас за покупку.

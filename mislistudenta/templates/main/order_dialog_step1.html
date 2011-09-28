@@ -1,0 +1,15 @@
+{% load bootstrap %}
+<div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h3>Заполните поля заказа</h3>
+</div>
+<div class="modal-body">
+    <form id="order_form">
+        {% csrf_token %}
+        {{ order_form|bootstrap }}
+        <input type="hidden" name="step" value="1" />
+    </form>
+</div>
+<div class="modal-footer">
+    <button id="order_dialog_btn_step1" class="btn primary">Далее</button>
+</div>
