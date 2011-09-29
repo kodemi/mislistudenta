@@ -1,5 +1,6 @@
 #-*-encoding:utf-8-*-
 from django.db import models
+from django.conf import settings
 
 DELIVERY_METHODS = (
     ('pickup', u'самовывоз'),
@@ -30,7 +31,7 @@ class Book(models.Model):
     price = models.DecimalField(u'Цена', max_digits=9, decimal_places=2)
 
     def __unicode__(self):
-        return u"%s (%s)" % (self.title, self.alias)
+        return self.title
 
     class Meta:
         verbose_name = u'Книга'
@@ -38,14 +39,22 @@ class Book(models.Model):
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, related_name='orders', verbose_name=u'Покупатель')
-    book = models.ForeignKey(Book, verbose_name='Книга')
+    book = models.ForeignKey(Book, verbose_name=u'Книга')
     quantity = models.PositiveIntegerField(u"Количество")
     payment_method = models.CharField(u"Форма оплаты", max_length=200, choices=PAYMENT_METHODS)
     delivery_method = models.CharField(u"Вид доставки", max_length=200, choices=DELIVERY_METHODS)
+    delivery_price = models.DecimalField(u"Стоимость доставки", max_digits=9, decimal_places=2, default=0)
     order_date = models.DateTimeField(u'Дата заказа')
     order_number = models.CharField(u'Номер заказа', max_length=6)
     amount = models.DecimalField(u'Стоимость', max_digits=9, decimal_places=2)
 
+    def calc_total(self):
+        return self.quantity * self.book.price + self.delivery_price
+
+    @classmethod
+    def calc_total2(cls, quantity=0, price=0, delivery_price=0):
+        return quantity * price + delivery_price
+    
     def __unicode__(self):
         return u"Заказ №%s" % self.order_number
 

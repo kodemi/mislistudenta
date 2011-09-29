@@ -1,13 +1,13 @@
 <div class="modal-header">
-    <a href="#" class="close">&times;</a>
+    <a href="#" class="close" title="Закрыть">&times;</a>
     <h3>Готово</h3>
 </div>
 <div class="modal-body">
     <h3>Уважаемый клиент!</h3>
 <p>Номер вашего заказа <strong>{{ order.order_number }}</strong>.<br/>
-Стоимость: <strong>{{ order.amount }}</strong> руб.<br/>
+Стоимость: <strong>{{ total }}</strong> руб.<br/>
 Форма оплаты: {{ order.get_payment_method_display }}.<br/>
-Подтверждение заказа отправлено вам на e-mail.<br/>
+Подтверждение заказа отправлено Вам на e-mail.<br/>
 Благодарим вас за покупку.</p>
 </div>
 <div class="modal-footer">

@@ -24,15 +24,16 @@ p, label {
     }
 }
 
-body {
-//    background-color: @back_color;
-    /*position: relative;*/
-    overflow: auto;
-    /*padding-top: 40px;*/
-    #gradient > .vertical(@back_color, @back_color2);
-}
-
+//body {
+////    background-color: @back_color;
+//    /*position: relative;*/
+//    /*overflow: auto;*/
+//    /*padding-top: 40px;*/
+//    #gradient > .vertical(@back_color, @back_color2);
+//}
+//
 html {
+    //background-color: @back_color2;
     #gradient > .vertical(@back_color, @back_color2);
 }
 
@@ -43,7 +44,7 @@ html {
 .modal-backdrop {
     z-index: 1000;
 }
-/*html, body {*/
+/*body {*/
     /*height: 100%;*/
 /*}*/
 
@@ -85,4 +86,20 @@ header {
 .loader {
     position: relative;
     top: @baseline/2;
+}
+
+.buy_btn {
+    margin-left: 90px;
+    #gradient > .vertical(#6a9d28, #436b0c);
+    color: @white;
+    border: 1px solid #006600;
+    border-bottom-color: #006600;
+    .border-radius(3px);
+    @shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 1px 2px rgba(0,0,0,.05);
+    .box-shadow(@shadow);
+    &:hover {
+        background-position: 0 -15px;
+        color: @white;
+        text-decoration: none;
+    }
 }

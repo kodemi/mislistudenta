@@ -1,18 +1,25 @@
 {% load main_extras %}
 <div class="modal-header">
-    <a href="#" class="close">&times;</a>
+    <a href="#" class="close" title="Закрыть">&times;</a>
     <h3>Проверьте, все ли верно</h3>
 </div>
 <div class="modal-body">
     <table>
-        {% for field in check_form %}
+        <tr>
+            <th>Ежедневник:</th>
+            <td>"{{ book }}"</td>
+        </tr>
+        {% for field in check_form.visible_fields %}
         <tr>
             <th>{{ field.label }}:</th>
             <td>{{ field|display_value }}</td>
         </tr>
         {% endfor %}
     </table>
-    <form id="order_form" action="" method="post">{% csrf_token %}
+    <div class="row">
+        <h3 class="pull-right">Стоимость заказа: {{ total }} руб.</h3>
+    </div>
+    <form id="order_form" action="" method="post" class="hide">{% csrf_token %}
         {% for field in check_form %}{{ field.as_hidden }}
         {% endfor %}
         <input type="hidden" name="step" value="2" />

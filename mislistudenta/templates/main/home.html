@@ -10,14 +10,31 @@
 {% endblock %}
 {% block content %}
     <div id="main" class="row">
-        <div class="span5">
+        <div class="span6">
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta eleifend accumsan. Maecenas faucibus convallis elit, at laoreet turpis tincidunt in. Suspendisse mauris augue, tincidunt quis blandit a, dictum vel tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut tellus nulla, iaculis sed euismod quis, gravida et ante. Praesent tristique mattis sapien quis laoreet. Curabitur eget ligula diam, eu semper dolor. Duis in porttitor tortor. Donec semper, risus a tincidunt facilisis, quam arcu pellentesque arcu, sed dignissim nulla felis nec purus. Donec tincidunt dictum arcu sit amet luctus. Maecenas nibh lacus, molestie sed pellentesque et, pellentesque nec felis. Suspendisse tortor felis, scelerisque vitae tincidunt non, bibendum vitae mauris.</p>
-            <a href="#" id="buy" class="btn primary">Buy</a>
         </div>
-        <div class="span11">
-            <img src="http://placehold.it/640x460">
+        <div class="span10">
+            <div class="row">
+                <div class="span5">
+                    <img id="white_book" src="static/maket_white_small.png" alt="">
+                    {#            <img src="http://placehold.it/640x460">#}
+                </div>
+                <div class="span5">
+                    {#            <img class="buy" src="static/buy.png">#}
+                    <img id="red_book" src="static/maket_red_small.png" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="span5">
+                    <a id="buy_white" class="buy_btn btn large" href="#">КУПИТЬ</a>
+                </div>
+                <div class="span5">
+                    <a id="buy_red" class="buy_btn btn large" href="#">КУПИТЬ</a>
+                </div>
+            </div>
         </div>
     </div>
+    
 
     <div id="order_dialog" class="modal hide fade">
         <div class="content">

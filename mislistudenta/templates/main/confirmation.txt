@@ -1,9 +1,28 @@
-Уважаемый {{ order.customer }}.
+Здравствуйте, {{ order.customer }}!
 
-Вы заказали "{{ order.book }}" в количестве {{ order.quantity }} шт. на сайте http://mislistudenta.ru.
-Номер вашего заказа {{ order.order_number }}.
-Стоимость: {{ order.amount }} руб.
-Форма оплаты: {{ order.get_payment_method_display }}.
-Вид доставки: {{ order.get_delivery_method_display }}.
+Mislistudenta.ru принял к обработке Ваш заказ.
+Номер заказа: {{ order.order_number }}
 
-Благодарим вас за покупку.
+*Состав заказа
+============================================
+
+Ежедневник {{ order.book }}
+{{ order.quantity }} шт. по цене {{ order.book.price }} руб.
+
+--------------------------------------------
+Сумма: {{ order.amount }} руб.
+Доставка: {{ order.delivery_price }} руб.
+
+--------------------------------------------
+Итого к оплате: {{ total }}
+
+**Детали заказа
+============================================
+Форма оплаты: {{ order.get_payment_method_display }}
+Вид доставки: {{ order.get_delivery_method_display }}
+
+
+Спасибо за заказ!
+
+С уважением,
+http://mislistudenta.ru

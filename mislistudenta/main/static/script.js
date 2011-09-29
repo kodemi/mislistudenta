@@ -38,17 +38,11 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
 
 $(document).ready(function(){
-    $('#buy').bind('click', function(){
-        get_form();
-        $('#order_dialog').modal({
-            'backdrop': true,
-            'keyboard': true,
-            'show': true
-        });
-
-        $('#order_dialog').bind('hide', function(){
-            $('#order_form').validationEngine('hide');
-        })
+    $('#buy_white').bind('click', function(){
+        buy('white')
+    });
+    $('#buy_red').bind('click', function(){
+        buy('red')
     });
     $('#order_dialog_btn_step1').live('click', function(){
         validate_form();
@@ -82,8 +76,22 @@ function validate_form(){
     }
 }
 
-function get_form(){
+function buy(alias){
+    get_form(alias);
+    $('#order_dialog').modal({
+        'backdrop': true,
+        'keyboard': true,
+        'show': true
+    });
+
+    $('#order_dialog').bind('hide', function(){
+        $('#order_form').validationEngine('hide');
+    })
+}
+
+function get_form(alias){
     var form = $("#order_form").serialize();
+    form = form + "&book=" + alias;
     $.get("/order/", {'form': form},
             function(response){
                 $("#order_dialog .content").html(response.html)
