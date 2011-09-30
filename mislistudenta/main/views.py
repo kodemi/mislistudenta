@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 import datetime
 from urlparse import parse_qsl
+from urllib2 import unquote
 from decimal import Decimal
 
 
@@ -49,6 +50,7 @@ def order(request):
                 template = "main/order_dialog_step2.html"
                 success = True
             else:
+                print 'invalid'
                 template = "main/order_dialog_step1.html"
                 form._errors = {}
                 context["order_form"] = form
@@ -85,7 +87,13 @@ def order(request):
     else:
         template = "main/order_dialog_step1.html"
         form = request.GET.get('form')
+#        form = unquote(request.GET.get('form').encode('utf8')).decode('utf8')
         if form:
+            print [form]
+            initial = dict(parse_qsl(form))
+            for k in initial:
+                initial[k] = unquote(initial[k].encode('utf8')).decode('utf8')
+            print 'Form: ', initial #initial['name']
             context["order_form"] = OrderForm(initial=dict(parse_qsl(form)))
         else:
             context["order_form"] = OrderForm()
