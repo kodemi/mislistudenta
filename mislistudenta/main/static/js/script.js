@@ -100,7 +100,11 @@ function buy(alias){
 
 function get_form(alias){
     var form = $("#order_form").serialize();
-    form = form + "&book=" + alias;
+    console.log('form: ' + form);
+    console.log($("#order_form"));
+    if (alias) {
+        form = form + "&book=" + alias;
+    }
     $.get("/order/", {'form': form},
             function(response){
                 $("#order_dialog .content").html(response.html)

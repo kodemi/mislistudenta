@@ -87,13 +87,8 @@ def order(request):
     else:
         template = "main/order_dialog_step1.html"
         form = request.GET.get('form')
-#        form = unquote(request.GET.get('form').encode('utf8')).decode('utf8')
         if form:
-            print [form]
-            initial = dict(parse_qsl(form))
-            for k in initial:
-                initial[k] = unquote(initial[k].encode('utf8')).decode('utf8')
-            print 'Form: ', initial #initial['name']
+            form = unquote(request.GET.get('form').encode('utf8')).decode('utf8')
             context["order_form"] = OrderForm(initial=dict(parse_qsl(form)))
         else:
             context["order_form"] = OrderForm()
