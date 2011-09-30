@@ -1,6 +1,6 @@
 #-*-encoding:utf-8-*-
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.template import RequestContext
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -90,7 +90,7 @@ def order(request):
         else:
             context["order_form"] = OrderForm()
         success = True
-    html = render_to_string(template, context)
+    html = render_to_string(template, RequestContext(request, context))
     response = simplejson.dumps({"success": success, "html": html})
     return HttpResponse(response,
                         content_type="application/javascript; charset=utf-8")
