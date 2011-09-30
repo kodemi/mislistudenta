@@ -5,27 +5,18 @@ from main.models import Customer, Book, Order
 
 verbose_name = lambda model, field_name: model._meta.get_field_by_name(field_name)[0].verbose_name
 
-#class OrderForm(ModelForm):
-#    class Meta:
-#        model = Customer
-#        widgets = {
-#            'lastname': TextInput(attrs={'class': 'span3 validate[required,custom[onlyLetterSp]]'}),
-#            'firstname': TextInput(attrs={'class': 'span3 validate[required,custom[onlyLetterSp]]'}),
-#            'email': TextInput(attrs={'class': 'span3 validate[required,custom[email]]'}),
-#            'tel': TextInput(attrs={'class': 'span3 validate[required,custom[phone]]'}),
-#            'quantity': TextInput(attrs={'class': 'span3 validate[required,min[1],custom[integer]'}),
-#            'payment_method': TextInput(attrs={'class': 'span3 validate[required]'}),
-#            'delivery_method': Select(attrs={'class': 'span3 validate[required]'}),
-#        }
-
 class OrderForm(forms.Form):
-    lastname = forms.CharField(
+#    lastname = forms.CharField(
+#            max_length=200,
+#            label=verbose_name(Customer, 'lastname'),
+#            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]'}))
+#    firstname = forms.CharField(
+#            max_length=200,
+#            label=verbose_name(Customer, 'firstname'),
+#            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]'}))
+    name = forms.CharField(
             max_length=200,
-            label=verbose_name(Customer, 'lastname'),
-            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]'}))
-    firstname = forms.CharField(
-            max_length=200,
-            label=verbose_name(Customer, 'firstname'),
+            label=verbose_name(Customer, 'name'),
             widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]'}))
     email = forms.EmailField(
             label=verbose_name(Customer, 'email'),
@@ -48,5 +39,4 @@ class OrderForm(forms.Form):
     book = forms.CharField(
             max_length=200,
             label=u"Ежедневник",
-            widget=HiddenInput()
-    )
+            widget=HiddenInput())

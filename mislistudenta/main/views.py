@@ -59,8 +59,9 @@ def order(request):
                 success = True
                 customer = Customer()
                 order = Order()
-                customer.lastname = form.cleaned_data['lastname']
-                customer.firstname = form.cleaned_data['firstname']
+#                customer.lastname = form.cleaned_data['lastname']
+#                customer.firstname = form.cleaned_data['firstname']
+                customer.name = form.cleaned_data['name']
                 customer.email = form.cleaned_data['email']
                 customer.tel = form.cleaned_data['tel']
                 customer.save()

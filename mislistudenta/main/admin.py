@@ -7,7 +7,7 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ('order_number', 'order_date', 'customer', 'book')
     list_filter = ('order_date', 'book')
     ordering = ('order_date',)
-    search_fields = ['^order_number', '^customer__firstname', '^customer__lastname', '^customer__email']
+    search_fields = ['^order_number', '^customer__name', '^customer__email']
 
 class OrderInLine(admin.TabularInline):
     model = Order
@@ -16,8 +16,8 @@ class OrderInLine(admin.TabularInline):
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'email')
-    ordering = ('lastname',)
-    search_fields = ['^firstname', '^lastname', '^email', 'tel']
+    ordering = ('name',)
+    search_fields = ['^name', '^email', 'tel']
     inlines = (OrderInLine,)
 
 admin.site.register(Customer, CustomerAdmin)

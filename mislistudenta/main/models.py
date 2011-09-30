@@ -4,22 +4,23 @@ from django.conf import settings
 
 DELIVERY_METHODS = (
     ('pickup', u'самовывоз'),
-    ('courier', u'курьер'),
-    ('post', u'почта')
+#    ('courier', u'курьер'),
+#    ('post', u'почта')
 )
 
 PAYMENT_METHODS = (
     ('cash', u'наличные'),
-    ('yandex', u'Яндекс.Деньги'),
+#    ('yandex', u'Яндекс.Деньги'),
 )
 class Customer(models.Model):
-    lastname = models.CharField(u"Фамилия", max_length=200)
-    firstname = models.CharField(u"Имя", max_length=200)
+#    lastname = models.CharField(u"Фамилия", max_length=200)
+#    firstname = models.CharField(u"Имя", max_length=200)
+    name = models.CharField(u'Имя', max_length=200)
     email = models.EmailField("E-mail")
     tel = models.CharField(u"Телефон", max_length=20)
 
     def __unicode__(self):
-        return u" ".join((self.lastname, self.firstname))
+        return self.name
 
     class Meta:
         verbose_name = u'Покупатель'
