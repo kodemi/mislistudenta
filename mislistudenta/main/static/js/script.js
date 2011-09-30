@@ -88,7 +88,7 @@ function validate_form(){
 function buy(alias){
     get_form(alias);
     $('#order_dialog').modal({
-        'backdrop': true,
+        'backdrop': "static",
         'keyboard': true,
         'show': true
     });
