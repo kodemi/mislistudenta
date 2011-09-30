@@ -74,10 +74,7 @@ def order(request):
                 if order.delivery_method == 'courier':
                     order.delivery_price = Decimal(settings.DELIVERY_PRICE)
                 order.order_date = datetime.datetime.now()
-                order.order_number = "%02d%02d%02d" % (
-                    order.order_date.day,
-                    order.order_date.hour,
-                    order.order_date.minute)
+                order.order_number = order.calc_order_number()
                 order.customer = customer
                 order.save()
                 context['order'] = order

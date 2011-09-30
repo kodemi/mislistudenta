@@ -17,7 +17,7 @@
         {% endfor %}
     </table>
     <div class="row">
-        <h3 class="pull-right">Стоимость заказа: {{ total }} руб.</h3>
+        <h3 class="pull-right">Стоимость заказа: {{ total|stringformat:"d" }} руб.</h3>
     </div>
     <form id="order_form" action="" method="post" class="hide">{% csrf_token %}
         {% for field in check_form %}{{ field.as_hidden }}
