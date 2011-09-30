@@ -38,12 +38,21 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
 
 $(document).ready(function(){
+
     $('#buy_white').bind('click', function(){
         buy('white')
     });
     $('#buy_red').bind('click', function(){
         buy('red')
+        
     });
+//    $('#buy_white').hover(function(){
+//        width = $('#white_book').width();
+//        $('#white_book').width(width*1.1);
+//    }, function(){
+//        width = $('#white_book').width();
+//        $('#white_book').width(width/1.1);
+//    });
     $('#order_dialog_btn_step1').live('click', function(){
         validate_form();
     });

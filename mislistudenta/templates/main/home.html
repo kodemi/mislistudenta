@@ -1,12 +1,13 @@
 {% extends "main/base.html" %}
 {% load bootstrap %}
+{% load main_extras %}
 {% block javascript %}
-    <script src="static/bootstrap/js/bootstrap-modal.js"></script>
-    <script src="static/bootstrap/js/bootstrap-alerts.js"></script>
-    <script src="static/jquery.validationEngine-ru.js"></script>
-    <script src="static/jquery.validationEngine.js"></script>
-    <script src="static/script.js"></script>
-    <link rel="stylesheet" href="static/validationEngine.jquery.css" type="text/css"/>
+    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap-alerts.js"></script>
+    <script src="{{ STATIC_URL }}/jquery.validationEngine-ru.js"></script>
+    <script src="{{ STATIC_URL }}/jquery.validationEngine.js"></script>
+    <script src="{{ STATIC_URL }}/script.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}/validationEngine.jquery.css" type="text/css"/>
 {% endblock %}
 {% block content %}
     <div id="main" class="row">
@@ -16,19 +17,23 @@
         <div class="span10">
             <div class="row">
                 <div class="span5">
-                    <img id="white_book" src="static/maket_white_small.png" alt="">
+                    <img id="white_book" src="{{ STATIC_URL }}/maket_white_small.png" alt="">
+
                     {#            <img src="http://placehold.it/640x460">#}
                 </div>
                 <div class="span5">
-                    {#            <img class="buy" src="static/buy.png">#}
-                    <img id="red_book" src="static/maket_red_small.png" alt="">
+                    {#            <img class="buy" src="{{ STATIC_URL }}/buy.png">#}
+                    <img id="red_book" src="{{ STATIC_URL }}/maket_red_small.png" alt="">
+
                 </div>
             </div>
             <div class="row">
                 <div class="span5">
+                    <span class="price">{{ white_price|stringformat:"d" }} руб.</span>
                     <a id="buy_white" class="buy_btn btn large" href="#">КУПИТЬ</a>
                 </div>
                 <div class="span5">
+                    <span class="price">{{ red_price|stringformat:"d" }} руб.</span>
                     <a id="buy_red" class="buy_btn btn large" href="#">КУПИТЬ</a>
                 </div>
             </div>

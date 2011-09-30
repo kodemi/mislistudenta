@@ -15,7 +15,12 @@ from decimal import Decimal
 
 def home(request):
     context = {}
-    context['order_form'] = OrderForm()
+    try:
+        context['white_price'] = Book.objects.get(alias='white').price
+        context['red_price'] = Book.objects.get(alias='red').price
+    except DoesNotExist:
+        pass
+#    context['order_form'] = OrderForm()
     return render(request, "main/home.html", context)
 
 def order(request):
@@ -86,3 +91,6 @@ def order(request):
     response = simplejson.dumps({"success": success, "html": html})
     return HttpResponse(response,
                         content_type="application/javascript; charset=utf-8")
+
+def contacts(request):
+    return render(request, "main/contacts.html", {})

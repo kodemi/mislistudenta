@@ -1,6 +1,7 @@
 from django.forms import ChoiceField, FileField
-
+from django.utils.safestring import mark_safe
 from django import template
+
 register = template.Library()
 
 @register.filter(name='field_value')
@@ -32,3 +33,21 @@ def display_value(field):
             if val == value:
                 return desc
     return value
+
+@register.filter
+def money(value, arg=None):
+    try:
+        tmp = "%d" % value
+        newvalue = []
+        while tmp:
+            newvalue.insert(0, tmp[-3:])
+            tmp = tmp[:-3]
+        newvalue = ' '.join(newvalue)
+        if arg and arg=="i":
+            tmpl = "%s<sup><i>%02d</i></sup>"
+        else:
+            tmpl = "%s<sup>%02d</sup>"
+        result =  tmpl % (newvalue, int(round((value - int(value))*100)))
+        return mark_safe(result)
+    except (TypeError, ValueError):
+        return value
