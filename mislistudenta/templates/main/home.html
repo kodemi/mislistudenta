@@ -2,12 +2,12 @@
 {% load bootstrap %}
 {% load main_extras %}
 {% block javascript %}
-    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap-modal.js"></script>
-    <script src="{{ STATIC_URL }}/bootstrap/js/bootstrap-alerts.js"></script>
-    <script src="{{ STATIC_URL }}/jquery.validationEngine-ru.js"></script>
-    <script src="{{ STATIC_URL }}/jquery.validationEngine.js"></script>
-    <script src="{{ STATIC_URL }}/script.js"></script>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/validationEngine.jquery.css" type="text/css"/>
+    <script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap-alerts.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.validationEngine-ru.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.validationEngine.js"></script>
+    <script src="{{ STATIC_URL }}js/script.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/validationEngine.jquery.css" type="text/css"/>
 {% endblock %}
 {% block content %}
     <div id="main" class="row">
@@ -17,13 +17,13 @@
         <div class="span10">
             <div class="row">
                 <div class="span5">
-                    <img id="white_book" src="{{ STATIC_URL }}/maket_white_small.png" alt="">
+                    <img id="white_book" src="{{ STATIC_URL }}images/maket_white_small.png" alt="">
 
                     {#            <img src="http://placehold.it/640x460">#}
                 </div>
                 <div class="span5">
                     {#            <img class="buy" src="{{ STATIC_URL }}/buy.png">#}
-                    <img id="red_book" src="{{ STATIC_URL }}/maket_red_small.png" alt="">
+                    <img id="red_book" src="{{ STATIC_URL }}images/maket_red_small.png" alt="">
 
                 </div>
             </div>
