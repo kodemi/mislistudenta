@@ -1,4 +1,5 @@
 #-*-encoding:utf-8-*-
+from django.core.exceptions import ObjectDoesNotExist
 
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -13,12 +14,13 @@ import datetime
 from urlparse import parse_qsl
 from decimal import Decimal
 
+
 def home(request):
     context = {}
     try:
         context['white_price'] = Book.objects.get(alias='white').price
         context['red_price'] = Book.objects.get(alias='red').price
-    except DoesNotExist:
+    except ObjectDoesNotExist:
         pass
 #    context['order_form'] = OrderForm()
     return render(request, "main/home.html", context)
@@ -33,7 +35,7 @@ def order(request):
             if form and form.is_valid():
                 try:
                     book = Book.objects.get(alias=form.cleaned_data['book'])
-                except DoesNotExist:
+                except ObjectDoesNotExist:
                     response = simplejson.dumps({"success": False})
                     return HttpResponse(response,
                         content_type="application/javascript; charset=utf-8")
