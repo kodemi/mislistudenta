@@ -74,13 +74,7 @@ function validate_form(){
         var form = $("#order_form").serialize();
         $.post("/order/", form,
                 function(response){
-                    if ( response.success == true ) {
-                        $("#order_dialog .content").html(response.html);
-                    }
-                    else if ( response.success == false ) {
-                        alert('false');
-                        $("#order_dialog .content").html(response.html);
-                    }
+                    $("#order_dialog .content").html(response.html)
                 }, "json");
     }
 }
@@ -105,7 +99,7 @@ function get_form(alias){
     }
     $.get("/order/", {'form': form},
             function(response){
-                $("#order_dialog .content").html(response.html)
+                $("#order_dialog .content").html(response.html);
                 $('#order_form').validationEngine({promptPosition : "centerRight", validationEventTrigger: "submit"});
                 $('input').change(function(){
                     $('#order_form').validationEngine('validateField', $(this))

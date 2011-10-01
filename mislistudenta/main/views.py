@@ -29,11 +29,12 @@ def home(request):
 def order(request):
     context = {}
     context.update(csrf(request))
+    template = "main/order_dialog_step1.html"
     if request.method == 'POST':
         step = request.POST.get('step', '1')
-        if step == '1': # form -> preview
-            form = OrderForm(request.POST)
-            if form and form.is_valid():
+        form = OrderForm(request.POST)
+        if form and form.is_valid():
+            if step == '1': # form -> preview
                 try:
                     book = Book.objects.get(alias=form.cleaned_data['book'])
                 except ObjectDoesNotExist:
@@ -49,15 +50,7 @@ def order(request):
                         if form.cleaned_data['delivery_method'] == 'courier' else 0)
                 template = "main/order_dialog_step2.html"
                 success = True
-            else:
-                print 'invalid'
-                template = "main/order_dialog_step1.html"
-                form._errors = {}
-                context["order_form"] = form
-                success = False
-        elif step == '2': # preview -> submit
-            form = OrderForm(request.POST)
-            if form and form.is_valid():
+            elif step == '2': # preview -> submit
                 success = True
                 customer = Customer()
                 order = Order()
@@ -81,8 +74,11 @@ def order(request):
                 context['total'] = order.calc_total()
                 template = "main/order_dialog_finish.html"
                 send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [order.customer.email])
+        else:
+            form._errors = {}
+            context["order_form"] = form
+            success = False
     else:
-        template = "main/order_dialog_step1.html"
         form = request.GET.get('form')
         if form:
             form = unquote(request.GET.get('form').encode('utf8')).decode('utf8')
