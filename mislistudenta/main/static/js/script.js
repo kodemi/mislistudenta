@@ -46,13 +46,16 @@ $(document).ready(function(){
         buy('red')
         
     });
-//    $('#buy_white').hover(function(){
-//        width = $('#white_book').width();
-//        $('#white_book').width(width*1.1);
-//    }, function(){
-//        width = $('#white_book').width();
-//        $('#white_book').width(width/1.1);
-//    });
+    $('#buy_white').hover(function(){
+        enlarge_book($("#white_book"), 10)
+    }, function(){
+        enlarge_book($("#white_book"), -10)
+    });
+    $('#buy_red').hover(function(){
+        enlarge_book($("#red_book"), 10)
+    }, function(){
+        enlarge_book($("#red_book"), -10)
+    });
     $('#order_dialog_btn_step1').live('click', function(){
         validate_form();
     });
@@ -116,4 +119,11 @@ function make_order(){
                     window.location = ""
                 })
             }, "json")
+}
+
+function enlarge_book(book, inc_x){
+    width = book.width();
+    offset = book.offset();
+    book.width(width + inc_x);
+    book.offset({ left: offset.left - inc_x/2, top: offset.top });
 }
