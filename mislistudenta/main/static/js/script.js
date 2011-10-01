@@ -42,26 +42,30 @@ $(document).ready(function(){
     $('#buy_white').bind('click', function(){
         buy('white')
     });
+
     $('#buy_red').bind('click', function(){
         buy('red')
-        
     });
+
     $('#buy_white').hover(function(){
         enlarge_book($("#white_book"), 10)
     }, function(){
         enlarge_book($("#white_book"), -10)
     });
+
     $('#buy_red').hover(function(){
         enlarge_book($("#red_book"), 10)
     }, function(){
         enlarge_book($("#red_book"), -10)
     });
+
     $('#order_dialog_btn_step1').live('click', function(){
         validate_form();
     });
+
     $('#order_dialog_btn_step2').live('click', function(){
         $('#order_dialog button').attr('disabled', 'disabled');
-        $('#order_dialog img.hide').removeClass('hide');
+        $('#loader').removeClass('hide');
         make_order();
     });
     $('#order_dialog_btn_back_step2').live('click', function(){

@@ -102,7 +102,7 @@ header {
     background-color: @footer_color;
 }
 
-.loader {
+#loader {
     position: relative;
     top: @baseline/2;
 }
@@ -167,4 +167,14 @@ header {
 
 #price_row {
     margin-top: 15px;
+}
+
+.close {
+    font-size: @basefont*2.2;
+    line-height: @baseline*1.1;
+    color: @black;
+    opacity: 0.5;
+    &:hover {
+        color: @red;
+    }
 }
