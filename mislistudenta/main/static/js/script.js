@@ -37,6 +37,13 @@ $(document).ajaxSend(function(event, xhr, settings) {
 
 
 
+jQuery(function() {
+	jQuery.support.placeholder = false;
+	test = document.createElement('input');
+	if('placeholder' in test) jQuery.support.placeholder = true;
+});
+
+
 $(document).ready(function(){
 
     $('#buy_white').bind('click', function(){
@@ -48,15 +55,15 @@ $(document).ready(function(){
     });
 
     $('#buy_white').hover(function(){
-        enlarge_book($("#white_book"), 10)
+        enlarge_book($("#white_book"), 6)
     }, function(){
-        enlarge_book($("#white_book"), -10)
+        enlarge_book($("#white_book"), -6)
     });
 
     $('#buy_red').hover(function(){
-        enlarge_book($("#red_book"), 10)
+        enlarge_book($("#red_book"), 6)
     }, function(){
-        enlarge_book($("#red_book"), -10)
+        enlarge_book($("#red_book"), -6)
     });
 
     $('#order_dialog_btn_step1').live('click', function(){
@@ -131,3 +138,23 @@ function enlarge_book(book, inc_x){
     book.width(width + inc_x);
     book.offset({ left: offset.left - inc_x/2, top: offset.top });
 }
+
+function placeholder(){
+	if(!$.support.placeholder) {
+		var active = document.activeElement;
+		$(':text').focus(function () {
+			if ($(this).attr('placeholder') != '' && $(this).val() == $(this).attr('placeholder')) {
+				$(this).val('').removeClass('hasPlaceholder');
+			}
+		}).blur(function () {
+			if ($(this).attr('placeholder') != '' && ($(this).val() == '' || $(this).val() == $(this).attr('placeholder'))) {
+				$(this).val($(this).attr('placeholder')).addClass('hasPlaceholder');
+			}
+		});
+		$(':text').blur();
+		$(active).focus();
+		$('form').submit(function () {
+			$(this).find('.hasPlaceholder').each(function() { $(this).val(''); });
+		});
+	}
+};

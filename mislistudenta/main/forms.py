@@ -17,14 +17,14 @@ class OrderForm(forms.Form):
     name = forms.CharField(
             max_length=200,
             label=verbose_name(Customer, 'name'),
-            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]'}))
+            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]', 'placeholder': u'Ваше имя'}))
     email = forms.EmailField(
             label=verbose_name(Customer, 'email'),
-            widget=TextInput(attrs={'class': 'span4 validate[required,custom[email]]'}))
+            widget=TextInput(attrs={'class': 'span4 validate[required,custom[email]]', 'placeholder': u'mail@example.com'}))
     tel = forms.CharField(
             max_length=20,
             label=verbose_name(Customer, 'tel'),
-            widget=TextInput(attrs={'class': 'span4 validate[required,custom[phone]]'}))
+            widget=TextInput(attrs={'class': 'span4 validate[required,custom[phone]]', 'placeholder': u'Например: +7(999)123-45-67'}))
     quantity = forms.IntegerField(
             label=verbose_name(Order, 'quantity'),
             widget=TextInput(attrs={'class': 'span4 validate[required,min[1],max[100],custom[integer]'}))
