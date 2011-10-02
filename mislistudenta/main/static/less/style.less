@@ -10,6 +10,8 @@
 @footer_color: #261805;
 @back_color: #FFD48E;
 @back_color2: darken(@back_color, 30%);
+@verse_font_size: 20px;
+
 
 p, label {
     /*font-family: Calibri;*/
@@ -17,14 +19,29 @@ p, label {
 }
 
 
-#main {
+#content {
     margin-top: 100px;
+}
+
+.caption {
+    /*margin-left: 80px;*/
+    text-align: center;
+    /*font-family: monospace;*/
+    font-size: @basefont;
+    line-height: @baseline;
+    color: darken(@back_color2, 20%);
+    width: 300px;
+}
+
+.caption2 {
+    .caption();
+    margin-left: 120px;
 }
 
 #verse {
     padding-top: 40px;
     p {
-        font: 20px Baskerville, "Palatino Linotype", "Times New Roman", Times, serif;
+        font: @verse_font_size Baskerville, "Palatino Linotype", "Times New Roman", Times, serif;
         text-align: left;
         color: darken(@back_color2, 40%);
         text-shadow: @grayDark 1px 1px 2px;
@@ -40,11 +57,7 @@ p, label {
 }
 
 #verse h3 + p:first-letter {
-	float: left;
     color: @red;
-	font-size: 30px;
-	line-height: 1;
-	margin: 2px 5px 0 0;
 }
 
 html {
@@ -180,9 +193,12 @@ header {
 }
 
 #order_dialog_btn_step2 {
-    font-style: bold;
+    font-weight: bold;
 }
 
+#order_dialog_btn_back_step2 {
+    float: left;
+}
 
 table {
     th, td {

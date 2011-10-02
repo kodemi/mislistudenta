@@ -71,7 +71,8 @@ $(document).ready(function(){
     });
 
     $('#order_dialog_btn_step2').live('click', function(){
-        $('#order_dialog button').attr('disabled', 'disabled');
+        $(this).removeClass('btn').addClass('hide');
+        $('#order_dialog_btn_back_step2').attr('disabled', 'disabled');
         $('#loader').removeClass('hide');
         make_order();
     });
