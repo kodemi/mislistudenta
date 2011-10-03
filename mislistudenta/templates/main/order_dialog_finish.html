@@ -4,12 +4,19 @@
 </div>
 <div class="modal-body">
     <h3>Уважаемый клиент!</h3>
-<p>Номер вашего заказа: <strong>{{ order.order_number }}</strong>.<br/>
-Стоимость: <strong>{{ total|stringformat:"d" }}</strong> руб.<br/>
-Форма оплаты: {{ order.get_payment_method_display }}.<br/>
-Подтверждение заказа отправлено Вам на e-mail.<br/>
-Благодарим вас за покупку.</p>
+    <ul class="unstyled order_details">
+        <li><span class="order_details_label">Номер заказа</span>: <strong>{{ order.order_number }}</strong>.</li>
+        <li><span class="order_details_label">Стоимость</span>: <strong>{{ total|stringformat:"d" }}</strong> руб.</li>
+        <li><span class="order_details_label">Форма оплаты</span>: <strong>{{ order.get_payment_method_display }}</strong>.</li>
+        <li>Подтверждение заказа направлено на {{  order.customer.email }}.</li>
+    </ul>
+    <p>
+        Благодарим вас за покупку.
+    </p>
 </div>
 <div class="modal-footer">
+    <div class="row">
+    <p class="pull-right"><em>Мысли проактивно</em></p>
+    </div>
     <a href="" id="order_dialog_btn_finish" class="btn primary">OK :-)</a>
 </div>

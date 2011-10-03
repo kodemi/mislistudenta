@@ -13,10 +13,10 @@
 @verse_font_size: 20px;
 
 
-p, label {
-    /*font-family: Calibri;*/
-    color: darken(@back_color2, 40%) !important;
-}
+//p, label {
+//    /*font-family: Calibri;*/
+//    color: darken(@back_color2, 40%) !important;
+//}
 
 
 #content {
@@ -24,18 +24,10 @@ p, label {
 }
 
 .caption {
-    /*margin-left: 80px;*/
     text-align: center;
-    /*font-family: monospace;*/
-    font-size: @basefont;
+    font-size: @basefont/1.2;
     line-height: @baseline;
     color: darken(@back_color2, 20%);
-    width: 300px;
-}
-
-.caption2 {
-    .caption();
-    margin-left: 120px;
 }
 
 #verse {
@@ -214,4 +206,19 @@ textarea,
 select,
 .uneditable-input {
     color: darken(@gray, 10%);
+}
+
+//.modal {
+//    color: @gray;
+//}
+.order_details {
+//    color: @grayDark !important;
+    /*list-style*/
+    li {
+        color: @grayDark;
+    }
+    li span {
+        float: left;
+        width: 9em;
+    }
 }
