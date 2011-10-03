@@ -1,8 +1,8 @@
-/*@font-face {*/
-  /*font-family: "Calibri";*/
-  /*src: url( /location/of/font/FontFileName.eot ); *//**//* IE */
-  /*src: local("Calibri"), url( static/CALIBRI.ttf ) format("truetype"); *//* non-IE */
-/*}*/
+@font-face {
+  font-family: "Calibri";
+  src: url( /location/of/font/FontFileName.eot );  //IE
+  src: local("Calibri"), url( static/CALIBRI.ttf ) format("truetype");  //non-IE
+}
 
 @basefont: 11pt;
 //@baseline: 16pt;
@@ -32,6 +32,7 @@
 
 #verse {
     padding-top: 40px;
+    padding-left: 20px;
     p {
         font: @verse_font_size Baskerville, "Palatino Linotype", "Times New Roman", Times, serif;
         text-align: left;
@@ -95,11 +96,34 @@ footer {
     /*margin: 0;*/
     border-top: none;
     padding-top: 40px;
-    p {
+    p:first-child {
         border-top: 1px solid darken(@back_color, 40%);
-        padding-top: 17px;
+        padding-top: 14px;
+    }
+    p {
         color: darken(@back_color2, 20%) !important;
-        text-align: center;
+        & .copyright {
+            width: 150px;
+            .center-block;
+//            .smile();
+        }
+    }
+    nav {
+        ul{
+            width: 280px;
+            .center-block;
+        }
+        li{
+            display: inline;
+            margin-left: 0.5em;
+            &:first-child{
+                margin-left: 70px;
+            }
+            a {
+                color: darken(@back_color2, 20%);
+                text-decoration: underline;
+            }
+        }
     }
 }
 
@@ -142,23 +166,7 @@ header {
 }
 
 #footer_nav {
-    ul{
-        width: 280px;
-        .center-block;
-    }
 
-    li{
-        display: inline;
-
-                margin-left: 1em;
-        &:first-child{
-            margin-left: 70px;
-        }
-        a {
-            color: darken(@back_color2, 20%);
-        text-decoration: underline;
-        }
-    }
 }
 
 .book  {
@@ -192,6 +200,23 @@ header {
     float: left;
 }
 
+#order_dialog_btn_finish {
+   img {
+       height: @basefont*1.2;
+       position: relative;
+       top: 2px;
+   }
+}
+
+.smile {
+    /*background-size: 12px 12px;*/
+    /*background-position: right center;*/
+    /*background-image: url('../images/smile-brown.png');*/
+    /*background-repeat: no-repeat;*/
+    height: @basefont;
+    vertical-align: middle;
+}
+
 table {
     th {
         width: 200px;
@@ -221,4 +246,14 @@ select,
         float: left;
         width: 9em;
     }
+}
+
+.alter_copyright {
+    font-family: Calibri;
+    font-size: 12pt !important;
+}
+
+.alter_copyright2 {
+    font-family: "Times New Roman";
+    font-size: 12pt !important;
 }
