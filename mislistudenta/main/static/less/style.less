@@ -95,7 +95,8 @@ body {
 footer {
     /*margin: 0;*/
     border-top: none;
-    padding-top: 40px;
+    padding-top: 0 !important;
+    margin-top: 0 !important;
     p:first-child {
         border-top: 1px solid darken(@back_color, 40%);
         padding-top: 14px;
@@ -111,18 +112,18 @@ footer {
     }
     nav {
         ul{
-            width: 280px;
+            width: 380px;
             .center-block;
         }
         li{
             display: inline;
             margin-left: 0.5em;
             &:first-child{
-                margin-left: 70px;
+                margin-left: 40px;
             }
             a {
                 color: darken(@back_color2, 20%);
-                text-decoration: underline;
+                /*text-decoration: underline;*/
             }
         }
     }
@@ -152,6 +153,14 @@ header {
     }
 }
 
+.nav_btn {
+    .buy_btn();
+    margin-left: 0px;
+    background: darken(@back_color2, 5%);
+    border: 1px solid darken(@back_color2, 15%);
+//    border: 2px solid @white;
+}
+
 .modal-header {
     background-color: @grayLight;
     color: @white;
@@ -164,10 +173,6 @@ header {
     font-weight: bold;
     font-style: italic;
     color: darken(@back_color2, 45%);
-}
-
-#footer_nav {
-
 }
 
 .book  {
@@ -270,3 +275,9 @@ select,
     top: -56px;
     right: -66px;
 }
+
+#social {
+    margin-top: 40px;
+    /*margin-bottom: 5px;*/
+}
+
