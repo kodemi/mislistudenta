@@ -10,7 +10,6 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'mislistudenta.views.home', name='home'),
     # url(r'^mislistudenta/', include('mislistudenta.foo.urls')),
-    url(r'^googlef5450b14f01d35b8.html$', TemplateView.as_view(template_name='main/googlef5450b14f01d35b8.html')),
     url(r'^', include('main.urls')),
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
