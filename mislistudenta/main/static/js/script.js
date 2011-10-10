@@ -46,6 +46,18 @@ jQuery(function() {
 
 $(document).ready(function(){
 
+//    $('#red_book').bind('click', function(e){
+//        e.preventDefault();
+//        url = $(this).attr('href');
+//        console.log(url);
+//        $('#book_preview img').attr('src', url).width(460);
+//        $('#book_preview').modal({ 'show': true, 'backdrop': true });
+//
+//    });
+    $(".book_link").fancybox({
+		'hideOnContentClick': true
+	});
+
     $('#buy_white').bind('click', function(){
         buy('white')
     });
@@ -55,15 +67,15 @@ $(document).ready(function(){
     });
 
     $('#buy_white').hover(function(){
-        enlarge_book($("#white_book"), 6)
+        enlarge_book($("#white_book img"), 6)
     }, function(){
-        enlarge_book($("#white_book"), -6)
+        enlarge_book($("#white_book img"), -6)
     });
 
     $('#buy_red').hover(function(){
-        enlarge_book($("#red_book"), 6)
+        enlarge_book($("#red_book img"), 6)
     }, function(){
-        enlarge_book($("#red_book"), -6)
+        enlarge_book($("#red_book img"), -6)
     });
 
     $('#order_dialog_btn_step1').live('click', function(){
