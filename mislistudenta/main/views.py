@@ -59,6 +59,8 @@ def order(request):
                 customer.name = form.cleaned_data['name']
                 customer.email = form.cleaned_data['email']
                 customer.tel = form.cleaned_data['tel']
+                customer.city = form.cleaned_data['city']
+                customer.address = form.cleaned_data['address']
                 customer.save()
                 order.book = Book.objects.get(alias=form.cleaned_data['book'])
                 order.quantity = form.cleaned_data['quantity']
@@ -75,7 +77,7 @@ def order(request):
                 template = "main/order_dialog_finish.html"
                 send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [order.customer.email])
         else:
-            form._errors = {}
+            #form._errors = {}
             context["order_form"] = form
             success = False
     else:

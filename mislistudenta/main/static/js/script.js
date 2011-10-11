@@ -96,13 +96,16 @@ $(document).ready(function(){
 });
 
 function validate_form(){
+    console.log($("#id_city").parent().parent());
     validated = $("#order_form").validationEngine('validate');
     if (validated) {
         var form = $("#order_form").serialize();
+        console.log($("#id_city").parent().parent());
         $.post("/order/", form,
                 function(response){
                     $("#order_dialog .content").html(response.html)
                 }, "json");
+        console.log($("#id_city").parent().parent());
     }
 }
 
@@ -127,11 +130,30 @@ function get_form(alias){
     $.get("/order/", {'form': form},
             function(response){
                 $("#order_dialog .content").html(response.html);
+                if ($("#id_delivery_method").attr('value') == 'pickup') {
+                    $("#id_city").parent().parent().addClass('hide');
+                    var city_class = $("#id_city").attr('class');
+                    $("#id_address").parent().parent().addClass('hide');
+                    var address_class = $("#id_address").attr('class');
+                }
                 $('#order_form').validationEngine({promptPosition : "centerRight", validationEventTrigger: "submit"});
                 $('input').change(function(){
                     $('#order_form').validationEngine('validateField', $(this))
                 });
-            }, "json")
+            }, "json");
+    $("#id_delivery_method").live('change', function(){
+        if ( $(this).attr('value') == 'pickup' ){
+            $("#id_city").parent().parent().addClass('hide');
+            $("#id_address").parent().parent().addClass('hide');
+            $("#id_city").attr('class', '');
+            $("#id_address").attr('class', '');
+        } else {
+            $("#id_city").parent().parent().removeClass('hide');
+            $("#id_address").parent().parent().removeClass('hide');
+            $("#id_city").attr('class', window.city_class);
+            $("#id_address").attr('class', window.address_class);
+        }
+    })
 }
 
 function make_order(){

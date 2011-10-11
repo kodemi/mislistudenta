@@ -5,7 +5,7 @@ import datetime
 
 DELIVERY_METHODS = (
     ('pickup', u'самовывоз'),
-#    ('courier', u'курьер'),
+    ('courier', u'курьер'),
 #    ('post', u'почта')
 )
 
@@ -19,6 +19,8 @@ class Customer(models.Model):
     name = models.CharField(u'Имя', max_length=200)
     email = models.EmailField("E-mail")
     tel = models.CharField(u"Телефон", max_length=20)
+    city = models.CharField(u"Город", max_length=200, default=u'')
+    address = models.CharField(u"Адрес", max_length=250, default=u'')
 
     def __unicode__(self):
         return u"%s (%s)" % (self.name, self.email)
