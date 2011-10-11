@@ -46,14 +46,29 @@ jQuery(function() {
 
 $(document).ready(function(){
 
-//    $('#red_book').bind('click', function(e){
-//        e.preventDefault();
-//        url = $(this).attr('href');
-//        console.log(url);
-//        $('#book_preview img').attr('src', url).width(460);
-//        $('#book_preview').modal({ 'show': true, 'backdrop': true });
-//
-//    });
+    $("#id_delivery_method").live('change', function(){
+        if ( $(this).attr('value') == 'pickup' ){
+//            $("#id_city").parent().parent().addClass('hide');
+//            $("#id_address").parent().parent().addClass('hide');
+            $("#id_city").parent().parent().hide();
+            $("#id_address").parent().parent().hide();
+//            window.city_class = $("#id_city").attr('class');
+//            window.address_class = $("#id_address").attr('class');
+//            $("#id_city").attr('class', '').validationEngine('hide');
+//            $("#id_address").attr('class', '').validationEngine('hide');
+             $("#id_city").validationEngine('hide');
+            $("#id_address").validationEngine('hide');
+        } else {
+//            $("#id_city").parent().parent().removeClass('hide');
+//            $("#id_address").parent().parent().removeClass('hide');
+            $("#id_city").parent().parent().show();
+            $("#id_address").parent().parent().show();
+//            $("#id_city").attr('class', window.city_class);
+//            $("#id_address").attr('class', window.address_class);
+            $(this).parent().parent().append(delivery_info);
+        }
+    });
+
     $(".book_link").fancybox({
 		'hideOnContentClick': true
 	});
@@ -96,16 +111,18 @@ $(document).ready(function(){
 });
 
 function validate_form(){
-    console.log($("#id_city").parent().parent());
     validated = $("#order_form").validationEngine('validate');
     if (validated) {
+        if ( $("#id_delivery_method").attr('value') == 'pickup' ){
+            $('#id_city').val('');
+            console.log($('#id_city'));
+            $('#id_address').attr('value', '');
+        }
         var form = $("#order_form").serialize();
-        console.log($("#id_city").parent().parent());
         $.post("/order/", form,
                 function(response){
                     $("#order_dialog .content").html(response.html)
                 }, "json");
-        console.log($("#id_city").parent().parent());
     }
 }
 
@@ -130,30 +147,13 @@ function get_form(alias){
     $.get("/order/", {'form': form},
             function(response){
                 $("#order_dialog .content").html(response.html);
-                if ($("#id_delivery_method").attr('value') == 'pickup') {
-                    $("#id_city").parent().parent().addClass('hide');
-                    var city_class = $("#id_city").attr('class');
-                    $("#id_address").parent().parent().addClass('hide');
-                    var address_class = $("#id_address").attr('class');
-                }
+                window.delivery_info = "<div id='delivery_info' ><p class='span4'>Стоимость доставки: " + $("#delivery_price").attr("data-delivery_price") + " руб.</p></div>"
+                $("#id_delivery_method").change();
                 $('#order_form').validationEngine({promptPosition : "centerRight", validationEventTrigger: "submit"});
                 $('input').change(function(){
                     $('#order_form').validationEngine('validateField', $(this))
                 });
             }, "json");
-    $("#id_delivery_method").live('change', function(){
-        if ( $(this).attr('value') == 'pickup' ){
-            $("#id_city").parent().parent().addClass('hide');
-            $("#id_address").parent().parent().addClass('hide');
-            $("#id_city").attr('class', '');
-            $("#id_address").attr('class', '');
-        } else {
-            $("#id_city").parent().parent().removeClass('hide');
-            $("#id_address").parent().parent().removeClass('hide');
-            $("#id_city").attr('class', window.city_class);
-            $("#id_address").attr('class', window.address_class);
-        }
-    })
 }
 
 function make_order(){
@@ -193,3 +193,4 @@ function placeholder(){
 		});
 	}
 };
+

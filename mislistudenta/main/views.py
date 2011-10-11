@@ -77,7 +77,7 @@ def order(request):
                 template = "main/order_dialog_finish.html"
                 send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [order.customer.email])
         else:
-            #form._errors = {}
+            form._errors = {}
             context["order_form"] = form
             success = False
     else:
@@ -87,6 +87,7 @@ def order(request):
             context["order_form"] = OrderForm(initial=dict(parse_qsl(form)))
         else:
             context["order_form"] = OrderForm()
+        context['delivery_price'] = settings.DELIVERY_PRICE
         success = True
     html = render_to_string(template, RequestContext(request, context))
     response = simplejson.dumps({"success": success, "html": html})
