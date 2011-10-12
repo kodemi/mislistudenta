@@ -76,6 +76,7 @@ def order(request):
                 context['total'] = order.calc_total()
                 template = "main/order_dialog_finish.html"
                 send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [order.customer.email])
+                send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [settings.DELIVERY_EMAIL])
         else:
             form._errors = {}
             context["order_form"] = form

@@ -36,13 +36,13 @@ class OrderForm(forms.Form):
             label=verbose_name(Order, 'delivery_method'),
             widget=Select(attrs={'class': 'span4 validate[required]'}),
             choices=Order._meta.get_field_by_name('delivery_method')[0].choices)
-    city = forms.ChoiceField(
+    city = forms.CharField(
             required=False,
-#            max_length=200,
+            max_length=200,
             label=u"Город доставки",
-#            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]', 'placeholder': u'Москва'}))
-            widget=Select(attrs={'class': 'span4 validate[required]'}),
-            choices=(('', '---------'), (u'Москва', u'Москва')))
+            widget=TextInput(attrs={'class': 'span4 validate[required,custom[onlyLetterSp]]', 'placeholder': u'Москва'}))
+#            widget=Select(attrs={'class': 'span4 validate[required]'}),
+#            choices=(('', '---------'), (u'Москва', u'Москва')))
     address = forms.CharField(
             required=False,
             max_length=200,

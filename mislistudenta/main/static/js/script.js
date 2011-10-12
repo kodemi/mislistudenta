@@ -48,24 +48,20 @@ $(document).ready(function(){
 
     $("#id_delivery_method").live('change', function(){
         if ( $(this).attr('value') == 'pickup' ){
-//            $("#id_city").parent().parent().addClass('hide');
-//            $("#id_address").parent().parent().addClass('hide');
             $("#id_city").parent().parent().hide();
             $("#id_address").parent().parent().hide();
-//            window.city_class = $("#id_city").attr('class');
-//            window.address_class = $("#id_address").attr('class');
-//            $("#id_city").attr('class', '').validationEngine('hide');
-//            $("#id_address").attr('class', '').validationEngine('hide');
              $("#id_city").validationEngine('hide');
             $("#id_address").validationEngine('hide');
-        } else {
-//            $("#id_city").parent().parent().removeClass('hide');
-//            $("#id_address").parent().parent().removeClass('hide');
+        } else if ( $(this).attr('value') == 'courier' ) {
             $("#id_city").parent().parent().show();
             $("#id_address").parent().parent().show();
-//            $("#id_city").attr('class', window.city_class);
-//            $("#id_address").attr('class', window.address_class);
             $(this).parent().parent().append(delivery_info);
+            $("#id_city").attr('value', 'Москва').addClass('disabled').attr('disabled', '')
+        } else {
+            $("#id_city").parent().parent().show();
+            $("#id_address").parent().parent().show();
+            $(this).parent().parent().append(delivery_info);
+            $("#id_city").attr('value', '').removeClass('disabled').removeAttr('disabled')
         }
     });
 
@@ -113,12 +109,17 @@ $(document).ready(function(){
 function validate_form(){
     validated = $("#order_form").validationEngine('validate');
     if (validated) {
+        console.log($('#id_city'));
         if ( $("#id_delivery_method").attr('value') == 'pickup' ){
-            $('#id_city').val('');
-            console.log($('#id_city'));
+            $('#id_city').attr('value', '');
+
             $('#id_address').attr('value', '');
+        } else {
+            $('#id_city').removeAttr('disabled')
         }
+        console.log($('#id_city'));
         var form = $("#order_form").serialize();
+        console.log(form);
         $.post("/order/", form,
                 function(response){
                     $("#order_dialog .content").html(response.html)
