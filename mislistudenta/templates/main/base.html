@@ -78,8 +78,49 @@
             <p><strong>Метро:</strong> м. Лубянка (м. Кузнецкий Мост), м. Чистые пруды
 (м. Тургеневская)</p>
             <p><strong>Телефон:</strong> +7 (499) 409-8209</p>
-            <p><strong>E-mail:</strong> info@mislistudenta.ru</p>
-            <img src="{{ STATIC_URL }}images/map.png">
+            <p><strong>E-mail:</strong> info<img class="icon" src="{{ STATIC_URL }}images/at.png">mislistudenta.ru</p>
+{#            <img id="map" src="http://static-maps.yandex.ru/1.x/?ll=37.63325,55.762599&z=15&l=map&size=474,354&pt=37.634452,55.761462,pmlbm&key=ADaUlU4BAAAAQk9aCgIAVtDlNdHH7Q-522SPXqPL3WkyKhQAAAAAAAAAAAAVXs8O2oM-O_u6NzDE69cN3ajBaA==&wizard=constructor" alt="Карта"/>#}
+{#            <img src="{{ STATIC_URL }}images/map.png">#}
+            <script src="http://api-maps.yandex.ru/1.1/?key=ADaUlU4BAAAAQk9aCgIAVtDlNdHH7Q-522SPXqPL3WkyKhQAAAAAAAAAAAAVXs8O2oM-O_u6NzDE69cN3ajBaA==&modules=pmap&wizard=constructor" type="text/javascript"></script>
+<script type="text/javascript">
+    YMaps.jQuery(window).load(function () {
+        var map = new YMaps.Map(YMaps.jQuery("#YMapsID-2649")[0]);
+        map.setCenter(new YMaps.GeoPoint(37.633165,55.762454), 15, YMaps.MapType.MAP);
+        map.addControl(new YMaps.Zoom());
+        map.addControl(new YMaps.ToolBar());
+        YMaps.MapType.PMAP.getName = function () { return "Народная"; };
+        map.addControl(new YMaps.TypeControl([
+            YMaps.MapType.MAP,
+            YMaps.MapType.SATELLITE,
+            YMaps.MapType.HYBRID,
+            YMaps.MapType.PMAP
+        ], [0, 1, 2, 3]));
+
+        YMaps.Styles.add("constructor#pmlbmPlacemark", {
+            iconStyle : {
+                href : "http://api-maps.yandex.ru/i/0.3/placemarks/pmlbm.png",
+                size : new YMaps.Point(28,29),
+                offset: new YMaps.Point(-8,-27)
+            }
+        });
+
+       map.addOverlay(createObject("Placemark", new YMaps.GeoPoint(37.634452,55.761462), "constructor#pmlbmPlacemark", "2 этаж, офис 232 (типография Business Copy)"));
+
+        function createObject (type, point, style, description) {
+            var allowObjects = ["Placemark", "Polyline", "Polygon"],
+                index = YMaps.jQuery.inArray( type, allowObjects),
+                constructor = allowObjects[(index == -1) ? 0 : index];
+                description = description || "";
+
+            var object = new YMaps[constructor](point, {style: style, hasBalloon : !!description});
+            object.description = description;
+
+            return object;
+        }
+    });
+</script>
+
+<div id="YMapsID-2649" style="width:530px;height:350px"></div>
         </div>
     </div>
     <footer class="footer">
