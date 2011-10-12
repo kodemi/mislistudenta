@@ -52,15 +52,19 @@ $(document).ready(function(){
             $("#id_address").parent().parent().hide();
              $("#id_city").validationEngine('hide');
             $("#id_address").validationEngine('hide');
+            deliv_info = $("#delivery_info");
+            if (deliv_info) {
+                 deliv_info.remove();
+            }
         } else if ( $(this).attr('value') == 'courier' ) {
             $("#id_city").parent().parent().show();
             $("#id_address").parent().parent().show();
-            $(this).parent().parent().append(delivery_info);
+            $(this).parent().after(window.delivery_info);
             $("#id_city").attr('value', 'Москва').addClass('disabled').attr('disabled', '')
         } else {
             $("#id_city").parent().parent().show();
             $("#id_address").parent().parent().show();
-            $(this).parent().parent().append(delivery_info);
+//            $(this).parent().append(delivery_info);
             $("#id_city").attr('value', '').removeClass('disabled').removeAttr('disabled')
         }
     });
