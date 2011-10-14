@@ -21,6 +21,8 @@ def home(request):
     try:
         context['white_price'] = Book.objects.get(alias='white').price
         context['red_price'] = Book.objects.get(alias='red').price
+        context['today'] = datetime.datetime.now()
+        context['last_order_number'] = Order.objects.order_by('-order_date')[0].order_number.split()[0]
     except ObjectDoesNotExist:
         pass
 #    context['order_form'] = OrderForm()

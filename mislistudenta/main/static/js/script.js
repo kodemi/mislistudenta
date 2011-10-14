@@ -165,6 +165,7 @@ function make_order(){
     var form = $("#order_form").serialize();
     $.post("/order/", form,
             function(response){
+                console.log(response);
                 $("#order_dialog .content").html(response.html)
                 $('#order_dialog').bind('hide', function(){
                     window.location = ""

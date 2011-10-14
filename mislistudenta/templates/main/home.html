@@ -10,6 +10,11 @@
 {% endblock %}
 {% block content %}
     <div class="row">
+        <div id="order_num" class="span16">
+            <p class="pull-right">За {{ today|date:"d.m.y" }} оформлен уже {{ last_order_number }} заказ.</p>
+        </div>
+    </div>
+    <div class="row first_content_row">
         <div class="span6">
             <h5 class="caption">КНИГИ ДЛЯ ТЕХ, КТО БЫЛ, ЕСТЬ И БУДЕТ СТУДЕНТОМ</h5>
         </div>
