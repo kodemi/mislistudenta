@@ -9,6 +9,8 @@ from main.forms import OrderForm
 from main.models import Customer, Order, Book
 from django.utils import simplejson
 from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
+from django.utils.html import strip_tags
 from django.conf import settings
 import datetime
 from urlparse import parse_qsl
@@ -21,8 +23,13 @@ def home(request):
     try:
         context['white_price'] = Book.objects.get(alias='white').price
         context['red_price'] = Book.objects.get(alias='red').price
-        context['today'] = datetime.datetime.now()
-        context['last_order_number'] = Order.objects.order_by('-order_date')[0].order_number.split()[0]
+        now = datetime.datetime.now()
+        today = datetime.date(year=now.year, month=now.month, day=now.day)
+        context['today'] = today
+        today_orders = Order.objects.filter(
+            order_date__gte=today).order_by(
+            '-order_date')
+        context['last_order_number'] = today_orders and today_orders[0].order_number.split()[0]
     except ObjectDoesNotExist:
         pass
 #    context['order_form'] = OrderForm()
@@ -77,8 +84,12 @@ def order(request):
                 context['order'] = order
                 context['total'] = order.calc_total()
                 template = "main/order_dialog_finish.html"
-                send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [order.customer.email])
-                send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.txt', context), settings.EMAIL_HOST_USER, [settings.DELIVERY_EMAIL])
+                email_html_content = render_to_string('main/confirmation.html', RequestContext(request, context))
+                email_text_content = strip_tags(email_html_content)
+                msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru', email_text_content, settings.EMAIL_HOST_USER, [order.customer.email])
+                msg.attach_alternative(email_html_content, 'text/html')
+                msg.send()
+#                send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.html', context), settings.EMAIL_HOST_USER, [settings.DELIVERY_EMAIL])
         else:
             form._errors = {}
             context["order_form"] = form

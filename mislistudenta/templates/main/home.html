@@ -11,7 +11,7 @@
 {% block content %}
     <div class="row">
         <div id="order_num" class="span16">
-            <p class="pull-right">За {{ today|date:"d.m.y" }} оформлен уже {{ last_order_number }} заказ.</p>
+            <p class="pull-right">{% if last_order_number %}За {{ today|date:"d.m.y" }} оформлен уже {{ last_order_number }} заказ.{% endif %}</p>
         </div>
     </div>
     <div class="row first_content_row">
