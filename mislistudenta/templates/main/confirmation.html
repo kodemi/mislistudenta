@@ -10,17 +10,24 @@
 
 Подтверждаем Ваш заказ:
 
-Номер заказа         :  {{ order.order_number }}
-Наименование товара  :  Ежедневник "{{ order.book }}"
-Количество           :  {{ order.quantity }} шт.
-Доставка             :  {{ order.delivery_price|stringformat:"d" }} руб.
-{% if order.delivery_method != 'pickup' %}
-Адрес доставки       :  {{ order.customer.city }}, {{ order.customer.address }}
-Контактный телефон   :  {{ order.customer.tel }}
+Номер заказа           :  {{ order.order_number }}
+Наименование товара    :  Ежедневник "{{ order.book }}"
+Количество             :  {{ order.quantity }} шт.
+Доставка               :  {% if order.delivery_method != 'pickup' %}{{ order.delivery_price|stringformat:"d" }} руб.{% else %}самовывоз
+Адрес                  :  г. Москва, Кривоколенный переулок, д. 5, стр. 4, 2 этаж, офис 232 (типография Business Copy)
+Наш контактный телефон :  +7 (499) 409-8209
+Схема проезда          :
+    
+<img src="http://static-maps.yandex.ru/1.x/?ll=37.63325,55.762599&z=15&l=map&size=474,354&pt=37.634452,55.761462,pmlbm&key=ADaUlU4BAAAAQk9aCgIAVtDlNdHH7Q-522SPXqPL3WkyKhQAAAAAAAAAAAAVXs8O2oM-O_u6NzDE69cN3ajBaA==&wizard=constructor">
+Просим Вас осуществить самовывоз в удобное для Вас время ежедневно с 10:00 до 20:00.{% endif %}
+{% if order.delivery_method != 'pickup' %}Адрес доставки         :  {{ order.customer.city }}, {{ order.customer.address }}
+Контактный телефон     :  {{ order.customer.tel }}
+Мы Вам позвоним, чтобы уточнить детали доставки.
+Наш контактный телефон :  +7 (499) 409-8209
 {% endif %}
 -------------------------------------------
-Общая стоимость      :  {{ total|stringformat:"d" }}
-Оплата               :  наличные
+Общая стоимость        :  {{ total|stringformat:"d" }} руб.
+Оплата                 :  наличные
 
 С вашего разрешения мы напечатаем еще несколько замечательных книг.
 Делать что-то хорошее это так естественно. Интересно узнать ваши

@@ -86,7 +86,7 @@ def order(request):
                 template = "main/order_dialog_finish.html"
                 email_html_content = render_to_string('main/confirmation.html', RequestContext(request, context))
                 email_text_content = strip_tags(email_html_content)
-                msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru', email_text_content, settings.EMAIL_HOST_USER, [order.customer.email])
+                msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru', email_text_content, "mislistudenta.ru <%s>" % settings.EMAIL_HOST_USER, [order.customer.email])
                 msg.attach_alternative(email_html_content, 'text/html')
                 msg.send()
 #                send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.html', context), settings.EMAIL_HOST_USER, [settings.DELIVERY_EMAIL])
