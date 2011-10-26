@@ -18,7 +18,7 @@
         <div class="span6">
             <h5 class="caption">КНИГИ ДЛЯ ТЕХ, КТО БЫЛ, ЕСТЬ И БУДЕТ СТУДЕНТОМ</h5>
         </div>
-        <div class="span10">
+        <div class="span7 offset3">
             <h5 class="caption">ИНТЕРЕСНО, ПОЧУВСТВУЕТЕ ЛИ ВЫ УДИВЛЕНИЕ, ОБНАРУЖИВ</h5>
         </div>
     </div>
@@ -46,26 +46,26 @@
         </div>
         <div class="span10">
             <div class="row">
-                <div class="span5 book_cont">
+                <div class="span5 offset4 book_cont">
                     <a id="white_book" class="book_link" href="{{ STATIC_URL }}images/maket_white_big.png">
                         <img class="book" src="{{ STATIC_URL }}images/maket_white_small.png" alt="">
                     </a>
                 </div>
-                <div class="span5 book_cont">
-                    <a id="red_book" class="book_link" href="{{ STATIC_URL }}images/maket_red_big.png">
-                        <img class="book" src="{{ STATIC_URL }}images/maket_red_small.png" alt="">
-                    </a>
-                </div>
+{#                <div class="span5 book_cont">#}
+{#                    <a id="red_book" class="book_link" href="{{ STATIC_URL }}images/maket_red_big.png">#}
+{#                        <img class="book" src="{{ STATIC_URL }}images/maket_red_small.png" alt="">#}
+{#                    </a>#}
+{#                </div>#}
             </div>
             <div id="price_row" class="row">
-                <div class="span5">
+                <div class="span5 offset4">
                     <span class="price">{{ white_price|stringformat:"d руб." }}</span>
                     <a id="buy_white" class="buy_btn btn large" href="#">КУПИТЬ</a>
                 </div>
-                <div class="span5">
-                    <span class="price">{{ red_price|stringformat:"d руб." }}</span>
-                    <a id="buy_red" class="buy_btn btn large" href="#">КУПИТЬ</a>
-                </div>
+{#                <div class="span5">#}
+{#                    <span class="price">{{ red_price|stringformat:"d руб." }}</span>#}
+{#                    <a id="buy_red" class="buy_btn btn large" href="#">КУПИТЬ</a>#}
+{#                </div>#}
             </div>
         </div>
     </div>
