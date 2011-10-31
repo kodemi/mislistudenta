@@ -7,6 +7,8 @@ TEMPLATE_DEBUG = DEBUG
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
 
+MAIN_TEMPLATE = 'main/home_1.html'
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )

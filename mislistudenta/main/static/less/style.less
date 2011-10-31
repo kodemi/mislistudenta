@@ -52,7 +52,7 @@
     color: darken(@back_color2, 20%);
 }
 
-#verse {
+#verse2 {
     padding-top: 40px;
     padding-left: 20px;
     p {
@@ -63,6 +63,11 @@
 	/*letter-spacing: 1px;*/
     /*}*/
     }
+}
+
+#verse1 {
+    #verse2();
+    padding-top: 70px;
 }
 
 #verse h3 + p:first-letter {
@@ -172,9 +177,20 @@ footer {
     position: absolute;
 }
 
+.big_book {
+    .book();
+    width: 364px;
+    height: 500px;
+}
+
 .book_cont {
     width: 280px;
     height: 384px;
+}
+
+.book_cont1 {
+    width: 364px;
+    height: 500px;
 }
 
 #price_row {

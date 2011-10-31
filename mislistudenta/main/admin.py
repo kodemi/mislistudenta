@@ -2,7 +2,7 @@ from django.contrib import admin
 from main.models import Customer, Book, Order
 
 class OrderAdmin(admin.ModelAdmin):
-    exclude = ('order_number',)
+#    exclude = ('order_number',)
     date_hierarchy = 'order_date'
     list_display = ('order_number', 'order_date', 'customer', 'book')
     list_filter = ('order_date', 'book')

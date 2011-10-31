@@ -108,6 +108,11 @@ $(document).ready(function(){
     });
     $.validationEngine.defaults.autoPositionUpdate = true;
 
+    $('#subscribe').live('change', function(){
+        order_number = $('#order_number').text();
+        $.post("/subscribe/" + order_number, {'subscribed': $(this)[0].checked}, function(){}, "json")
+    })
+
 });
 
 function validate_form(){
@@ -172,11 +177,13 @@ function make_order(){
             }, "json")
 }
 
-function enlarge_book(book, inc_x){
+function enlarge_book(book, inc){
     width = book.width();
+    height = book.height();
     offset = book.offset();
-    book.width(width + inc_x);
-    book.offset({ left: offset.left - inc_x/2, top: offset.top });
+    book.width(width + inc);
+    book.height(height + inc);
+    book.offset({ left: offset.left - inc/2, top: offset.top });
 }
 
 function placeholder(){

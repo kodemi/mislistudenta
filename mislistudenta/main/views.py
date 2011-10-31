@@ -33,7 +33,8 @@ def home(request):
     except ObjectDoesNotExist:
         pass
 #    context['order_form'] = OrderForm()
-    return render(request, "main/home.html", context)
+    template = settings.MAIN_TEMPLATE
+    return render(request, template, context)
 
 def order(request):
     context = {}
@@ -86,10 +87,10 @@ def order(request):
                 template = "main/order_dialog_finish.html"
                 email_html_content = render_to_string('main/confirmation.html', RequestContext(request, context))
                 email_text_content = strip_tags(email_html_content)
-                msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru', email_text_content, "mislistudenta.ru <%s>" % settings.EMAIL_HOST_USER, [order.customer.email])
-                msg.attach_alternative(email_html_content, 'text/html')
-                msg.send()
-#                send_mail(u'Заказ на mislistudenta.ru', render_to_string('main/confirmation.html', context), settings.EMAIL_HOST_USER, [settings.DELIVERY_EMAIL])
+                for destination in [order.customer.email, settings.DELIVERY_EMAIL]:
+                    msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru', email_text_content, "mislistudenta.ru <%s>" % settings.EMAIL_HOST_USER, [destination])
+                    msg.attach_alternative(email_html_content, 'text/html')
+                    msg.send()
         else:
             form._errors = {}
             context["order_form"] = form
@@ -110,3 +111,18 @@ def order(request):
 
 def contacts(request):
     return render(request, "main/contacts.html", {})
+
+def subscribe(request, order_number):
+    print order_number
+    if request.method == 'POST':
+        subscribed = request.POST.get('subscribed', True)
+        order = Order.objects.filter(order_number=order_number)
+        if order:
+            customer = order[0].customer
+            customer.subscribe = True if subscribed == 'true' else False
+            customer.save()
+        response = ""
+        return HttpResponse(response,
+                        content_type="application/javascript; charset=utf-8")
+    return HttpResponse("",
+                        content_type="application/javascript; charset=utf-8")

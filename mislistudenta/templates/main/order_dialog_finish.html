@@ -5,11 +5,17 @@
 <div class="modal-body">
     <h3>Уважаемый клиент!</h3>
     <ul class="unstyled order_details">
-        <li><span class="order_details_label">Номер заказа</span>: <strong>{{ order.order_number }}</strong>.</li>
+        <li><span class="order_details_label">Номер заказа</span>: <strong id="order_number">{{ order.order_number }}</strong>.</li>
         <li><span class="order_details_label">Стоимость</span>: <strong>{{ total|stringformat:"d" }}</strong> руб.</li>
         <li><span class="order_details_label">Форма оплаты</span>: <strong>{{ order.get_payment_method_display }}</strong>.</li>
         <li>Подтверждение заказа направлено на {{  order.customer.email }}.</li>
     </ul>
+    <p>
+
+        <input type="checkbox" id="subscribe" name="subscribe" checked="true">
+        <span>хочу узнавать новое</span>
+    
+    </p>
     <p>
         Благодарим вас за покупку.
     </p>
