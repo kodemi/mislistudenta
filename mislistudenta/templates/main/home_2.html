@@ -1,0 +1,92 @@
+{% extends "main/base.html" %}
+{% load bootstrap %}
+{% load main_extras %}
+{% block javascript %}
+{#    <script src="{{ STATIC_URL }}js/bootstrap-alerts.js"></script>#}
+    <script src="{{ STATIC_URL }}js/jquery.validationEngine-ru.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.validationEngine.js"></script>
+    <script src="{{ STATIC_URL }}js/script.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/validationEngine.jquery.css" type="text/css"/>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div id="order_num" class="span16">
+            <p class="pull-right">{% if last_order_number %}За {{ today|date:"d.m.y" }} оформлен уже {{ last_order_number }} заказ.{% endif %}</p>
+        </div>
+    </div>
+    <div class="row first_content_row">
+        <div class="span6">
+            <h5 class="caption">КНИГИ ДЛЯ ТЕХ, КТО БЫЛ, ЕСТЬ И БУДЕТ СТУДЕНТОМ</h5>
+        </div>
+        <div class="span7 offset2">
+            <h5 class="caption">ИНТЕРЕСНО, ПОЧУВСТВУЕТЕ ЛИ ВЫ УДИВЛЕНИЕ, ОБНАРУЖИВ</h5>
+        </div>
+    </div>
+    <div class="main row">
+        <div class="span6">
+            <div id="verse2">
+                <h3 class="hide"></h3>
+                <p>Студентом быть!<br>
+                Так круто! Кайф!<br>
+                </p>
+                <p>
+                В такие годы: мечтай, студент!<br>
+                И думай, обо всем на свете.<br>
+                </p>
+                <p>
+                Но вот беда!<br>
+                Известны мысли эти.<br>
+                Но эти слова три, решают все!<br>
+                Как ни крути.<br>
+                Интрига? Да-а.<br>
+                Так покупай, читай, пиши.<br>
+                </p>
+            </div>
+
+        </div>
+        <div class="span10">
+            <div class="row">
+                <div class="span5 book_cont">
+                    <a id="white_book" class="book_link" href="{{ STATIC_URL }}images/maket_white_big.png">
+                        <img class="book" src="{{ STATIC_URL }}images/maket_white_small.png" alt="">
+                    </a>
+                </div>
+                <div class="span5 book_cont">
+                    <a id="red_book" class="book_link" href="{{ STATIC_URL }}images/maket_red_big.png">
+                        <img class="book" src="{{ STATIC_URL }}images/maket_red_small.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div id="price_row" class="row">
+                <div class="span5">
+                    <span class="price">{{ white_price|stringformat:"d руб." }}</span>
+                    <a id="buy_white" class="buy_btn btn large" href="#">КУПИТЬ</a>
+                </div>
+                <div class="span5">
+                    <span class="price">{{ red_price|stringformat:"d руб." }}</span>
+                    <a id="buy_red" class="buy_btn btn large" href="#">КУПИТЬ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div id="order_dialog" class="modal hide fade">
+        <div class="content">
+        <!--{% include "main/order_dialog_step1.html" %}-->
+        </div>
+    </div>
+
+    <div id="book_preview" class="modal hide fade">
+{##}
+{#        <div class="modal-header">#}
+{#            <a href="#" class="close">&times;</a>#}
+{#            <p>&nbsp;</p>#}
+{#        </div>#}
+        <div class="modal-body">
+        <p><a href="#" class="close">&times;</a></p>
+        <img>
+        </div>
+    </div>
+{% endblock %}
