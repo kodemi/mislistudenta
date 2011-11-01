@@ -2,7 +2,7 @@
 import os
 from local_settings import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
