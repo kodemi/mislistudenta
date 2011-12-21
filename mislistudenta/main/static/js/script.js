@@ -81,6 +81,10 @@ $(document).ready(function(){
         buy('red')
     });
 
+    $('#buy_blond').bind('click', function(){
+        buy('blond')
+    });
+
     $('#buy_white').hover(function(){
         enlarge_book($("#white_book img"), 6)
     }, function(){
@@ -91,6 +95,12 @@ $(document).ready(function(){
         enlarge_book($("#red_book img"), 6)
     }, function(){
         enlarge_book($("#red_book img"), -6)
+    });
+
+    $('#buy_blond').hover(function(){
+        enlarge_book($("#blond_book img"), 6)
+    }, function(){
+        enlarge_book($("#blond_book img"), -6)
     });
 
     $('#order_dialog_btn_step1').live('click', function(){
@@ -118,7 +128,6 @@ $(document).ready(function(){
 function validate_form(){
     validated = $("#order_form").validationEngine('validate');
     if (validated) {
-        console.log($('#id_city'));
         if ( $("#id_delivery_method").attr('value') == 'pickup' ){
             $('#id_city').attr('value', '');
 
@@ -126,9 +135,7 @@ function validate_form(){
         } else {
             $('#id_city').removeAttr('disabled')
         }
-        console.log($('#id_city'));
         var form = $("#order_form").serialize();
-        console.log(form);
         $.post("/order/", form,
                 function(response){
                     $("#order_dialog .content").html(response.html)

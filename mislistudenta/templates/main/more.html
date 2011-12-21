@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/validationEngine.jquery.css" type="text/css"/>
 {% endblock %}
 {% block content %}
-
+    <div class="row">
+        <div id="order_num" class="span16">
+            <p class="pull-right">{% if last_order_number %}За {{ today|date:"d.m.y" }} оформлен уже {{ last_order_number }} заказ.{% endif %}</p>
+        </div>
+    </div>
     <div id="more_page_row" class="row first_content_row">
         <div class="span6 offset2">
 {#            <p class="announce">#}
@@ -42,7 +46,25 @@
             </p>
         </div>
         <div class="span7 offset1">
-            <img id="empty_book" src="{{ STATIC_URL }}images/empty_book.png">
+            <div class="row">
+                <div class="span5 book_cont1">
+                    <a id="blond_book" class="book_link" href="{{ STATIC_URL }}images/blond_big.png">
+                        <img class="big_book" src="{{ STATIC_URL }}images/blond_small.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div id="price_row" class="row">
+                <div class="span5 offset1">
+                    <span class="price">{{ blond_price|stringformat:"d руб." }}</span>
+                    <a id="buy_blond" class="buy_btn btn large" href="#">КУПИТЬ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="order_dialog" class="modal hide fade">
+        <div class="content">
+            <!--{% include "main/order_dialog_step1.html" %}-->
         </div>
     </div>
 

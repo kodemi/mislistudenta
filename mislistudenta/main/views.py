@@ -10,6 +10,7 @@ from main.models import Customer, Order, Book
 from django.utils import simplejson
 from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
+from smtplib import SMTPException
 from django.utils.html import strip_tags
 from django.conf import settings
 import datetime
@@ -18,11 +19,12 @@ from urllib2 import unquote
 from decimal import Decimal
 
 
-def home(request):
+def home(request, template=settings.MAIN_TEMPLATE):
     context = {}
     try:
         context['white_price'] = Book.objects.get(alias='white').price
         context['red_price'] = Book.objects.get(alias='red').price
+        context['blond_price'] = Book.objects.get(alias='blond').price
         now = datetime.datetime.now()
         today = datetime.date(year=now.year, month=now.month, day=now.day)
         context['today'] = today
@@ -33,7 +35,7 @@ def home(request):
     except ObjectDoesNotExist:
         pass
 #    context['order_form'] = OrderForm()
-    template = settings.MAIN_TEMPLATE
+#    template = settings.MAIN_TEMPLATE
     return render(request, template, context)
 
 def order(request):
@@ -55,7 +57,7 @@ def order(request):
                 context['check_form'] = form
                 context['total'] = Order.calc_total2(
                     quantity=form.cleaned_data['quantity'],
-                    price=Book.objects.filter(alias="red")[0].price,
+                    price=book.price,
                     delivery_price=Decimal(settings.DELIVERY_PRICE)
                         if form.cleaned_data['delivery_method'] == 'courier' else 0)
                 template = "main/order_dialog_step2.html"
@@ -85,12 +87,25 @@ def order(request):
                 context['order'] = order
                 context['total'] = order.calc_total()
                 template = "main/order_dialog_finish.html"
-                email_html_content = render_to_string('main/confirmation.html', RequestContext(request, context))
+                email_html_content = render_to_string('main/confirmation.html',
+                                                      RequestContext(request, context))
                 email_text_content = strip_tags(email_html_content)
                 for destination in [order.customer.email, settings.DELIVERY_EMAIL]:
-                    msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru', email_text_content, "mislistudenta.ru <%s>" % settings.EMAIL_HOST_USER, [destination])
+                    msg = EmailMultiAlternatives(u'Заказ на mislistudenta.ru',
+                                                 email_text_content,
+                                                 "mislistudenta.ru <%s>" % settings.EMAIL_HOST_USER,
+                                                 [destination])
                     msg.attach_alternative(email_html_content, 'text/html')
-                    msg.send()
+                    try:
+                        msg.send()
+                    except SMTPException as e:
+                            msg = u"Error: %s\nDestination: %s\nOrder number: %s" % (e, destination, order.order_number)
+                            send_mail('[Django] Error in e-mail sending',
+                                  msg,
+                                  '',
+                                  [mail[1] for mail in settings.ADMINS],
+                                  auth_user=settings.ADMIN_HOST_USER,
+                                  auth_password=settings.ADMIN_HOST_PASSWORD)
         else:
             form._errors = {}
             context["order_form"] = form
@@ -113,7 +128,6 @@ def contacts(request):
     return render(request, "main/contacts.html", {})
 
 def subscribe(request, order_number):
-    print order_number
     if request.method == 'POST':
         subscribed = request.POST.get('subscribed', True)
         order = Order.objects.filter(order_number=order_number)
